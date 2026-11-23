@@ -302,12 +302,14 @@ plt.tight_layout(); plt.show()
 ### 1. Compilation, execution and CUDA Sobel output (3840x2160 image, 16x16 blocks)
 The program runs on the GPU and takes about 1.14 ms per Sobel pass on the full 3840x2160 image. The edge map shows the outlines of the hair, face, eyes, hand and cloak, while the smooth background stays dark.
 
-![Run output and CUDA Sobel result](output1_run_and_cuda.png)
+<img width="1153" height="688" alt="image" src="https://github.com/user-attachments/assets/7846866a-6fc6-43e5-b269-6955d8d0e94a" />
+
 
 ### 2. Performance analysis: image size and block size
 Kernel time is the average of 100 launches (GPU) and the average of 20 runs (CPU, including the grayscale conversion). GPU time excludes host-to-device and device-to-host copies.
 
-![Timing table and graph](output2_timing_table_graph.png)
+<img width="605" height="875" alt="image" src="https://github.com/user-attachments/assets/d52aa010-c8f5-4f4c-84db-ceb80fefd207" />
+
 
 | Image size | Block | GPU kernel (ms) | CPU OpenCV (ms) | Speedup | Mean diff | Max diff |
 |-----------:|:-----:|----------------:|----------------:|--------:|----------:|---------:|
@@ -328,7 +330,8 @@ Kernel time is the average of 100 launches (GPU) and the average of 20 runs (CPU
 
 The CUDA and CPU edge maps look identical, and the difference image (amplified 50 times) is completely black.
 
-![CUDA vs CPU comparison](output3_cuda_vs_cpu.png)
+<img width="1011" height="847" alt="image" src="https://github.com/user-attachments/assets/dab53d8e-ad77-422d-ab0e-b847617e5ce2" />
+
 
 ## RESULT:
 Thus the program has been executed by using CUDA to perform Sobel edge detection on a color image, with the grayscale conversion and the Sobel filter done on the GPU. The GPU kernel was 14x to 80x faster than the OpenCV CPU implementation (kernel time only), the 16x16 block size gave the best performance, and the CUDA output matched the CPU output to within a mean difference of less than 0.004 gray levels.
